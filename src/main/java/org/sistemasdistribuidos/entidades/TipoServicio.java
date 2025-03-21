@@ -22,4 +22,9 @@ public enum TipoServicio {
     public String getDescripcion() {
         return descripcion;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s | %-10d | %s", name(), costoHora, descripcion);
+    }
 }
