@@ -1,9 +1,9 @@
 package org.sistemasdistribuidos.persistencia;
 
 import org.sistemasdistribuidos.entidades.Usuario;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +19,14 @@ public class RepoUsuarios {
     }
 
     private static void cargarUsuariosDesdeArchivo(String nombreArchivo) {
-        try (BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try (InputStream inputStream = RepoUsuarios.class.getClassLoader().getResourceAsStream(nombreArchivo);
+             BufferedReader br = new BufferedReader(new InputStreamReader (inputStream, StandardCharsets.UTF_8))) {
+
+            if (inputStream == null) {
+                System.err.println("No se pudo encontrar el archivo: " + nombreArchivo);
+                return;
+            }
+
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] partes = linea.split(", ");
