@@ -1,8 +1,14 @@
 package org.sistemasdistribuidos;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class MyUBERImpl implements iMyUBER{
+// UnicastRemoteObject genera un stub que permite exportar el objeto remoto
+public class MyUBERImpl extends UnicastRemoteObject implements iMyUBER{
+    protected MyUBERImpl() throws RemoteException {
+        super();
+    }
+
     //TODO #1
     @Override
     public Boolean registrarUsuario(String nombre, long telefono) throws RemoteException {
