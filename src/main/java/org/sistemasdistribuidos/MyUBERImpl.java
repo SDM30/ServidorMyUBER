@@ -19,17 +19,19 @@ public class MyUBERImpl extends UnicastRemoteObject implements iMyUBER{
     //TODO #1
     @Override
     public Boolean registrarUsuario(String nombre, long telefono) throws RemoteException {
+        System.out.println ("Cliente: Registro usuario");
         List<Usuario> usuarios = RepoUsuarios.obtenerUsuarios();
-        for (Usuario user: usuarios) {
-            if (user.getNombre().equals(nombre) && user.getTelefono() == telefono) {
-                return true;
-            }
+        if (RepoUsuarios.agregarUsuario (nombre, telefono)) {
+            return true;
+        } else {
+            System.err.println ("El usuario a registrar ya existe");
         }
         return false;
     }
 
     @Override
     public String consutarTiposServicio() throws RemoteException{
+        System.out.println ("Cliente: Consulta tipos de servicio");
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-10s | %-10s | %s%n", "Servicio", "Costo/Hora", "Descripción"));
         sb.append("-----------------------------------------------------------\n");
