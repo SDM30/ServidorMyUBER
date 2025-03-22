@@ -33,7 +33,7 @@ No modificar el código fuente y ejecutarlo directamente. En otra ventana, ejecu
 ### Ejecutar en varias máquinas  
 
 1. En el código fuente, entra a la clase `MainServidor`.  
-2. Quita el comentario a la línea:  
+2. Quita el comentario a la línea y ingrese la direccion IPv4 del pc que va a ejecutar el programa:  
 
    ```
    System.setProperty("java.rmi.server.hostname", "IP PC servidor");
