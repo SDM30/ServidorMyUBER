@@ -19,14 +19,35 @@ public class MyUBERImpl extends UnicastRemoteObject implements iMyUBER{
     //TODO #1
     @Override
     public Boolean registrarUsuario(String nombre, long telefono) throws RemoteException {
-        System.out.println ("Cliente: Registro usuario");
-        List<Usuario> usuarios = RepoUsuarios.obtenerUsuarios();
-        if (RepoUsuarios.agregarUsuario (nombre, telefono)) {
-            return true;
-        } else {
-            System.err.println ("El usuario a registrar ya existe");
+        System.out.println("Cliente: Solicitud de registro de usuario: " + nombre);
+
+        // Validaciones de entrada
+        if (nombre == null || nombre.trim().isEmpty()) {
+            System.err.println("Error: El nombre no puede estar vacío");
+            return false;
         }
-        return false;
+
+        if (telefono <= 0) {
+            System.err.println("Error: El teléfono debe ser un número positivo");
+            return false;
+        }
+
+        // Verificamos si ya existe el usuario antes de intentar agregarlo
+        if (RepoUsuarios.verificarUsuarioExistente(nombre, telefono)) {
+            System.err.println("Error: El usuario " + nombre + " ya existe en el sistema");
+            return false;
+        }
+
+        // Si llegamos aquí, intentamos agregar el usuario
+        boolean resultado = RepoUsuarios.agregarUsuario(nombre, telefono);
+
+        if (resultado) {
+            System.out.println("Usuario " + nombre + " registrado exitosamente");
+        } else {
+            System.err.println("Error al registrar el usuario " + nombre);
+        }
+
+        return resultado;
     }
 
     @Override
