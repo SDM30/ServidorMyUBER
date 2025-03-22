@@ -101,6 +101,10 @@ public class RepoUsuarios {
     /**
      * Carga los usuarios desde el recurso ubicado en src/main/resources/Usuarios.txt.
      */
+    /**
+     * Carga los usuarios desde el recurso ubicado en src/main/resources/Usuarios.txt.
+     * Luego, los escribe en el archivo externo.
+     */
     private static void cargarUsuariosDesdeRecurso() {
         try (InputStream is = RepoUsuarios.class.getResourceAsStream("/Usuarios.txt")) {
             if (is == null) {
@@ -115,18 +119,23 @@ public class RepoUsuarios {
                         try {
                             String nombre = partes[0];
                             long telefono = Long.parseLong(partes[1]);
-                            usuarios.add(new Usuario(nombre, telefono));
+                            Usuario usuario = new Usuario(nombre, telefono);
+                            usuarios.add(usuario);
+
+                            // Escribir el usuario en el archivo externo
+                            escribirUsuarioEnArchivo(usuario);
                         } catch (NumberFormatException e) {
                             System.err.println("Error al parsear teléfono en línea: " + linea);
                         }
                     }
                 }
-                System.out.println("Usuarios cargados desde el recurso Usuarios.txt.");
+                System.out.println("Usuarios cargados desde el recurso Usuarios.txt y guardados en el archivo.");
             }
         } catch (IOException e) {
             System.err.println("Error al leer el recurso Usuarios.txt: " + e.getMessage());
         }
     }
+
 
     /**
      * Verifica si un usuario ya existe en la lista.

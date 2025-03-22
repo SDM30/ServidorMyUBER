@@ -2,12 +2,14 @@ package org.sistemasdistribuidos.persistencia;
 
 import org.sistemasdistribuidos.entidades.Taxi;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RepoTaxis {
-    private static List<Taxi> taxis;
-    public static List<Taxi> obtenerTaxis () {
-        if (taxis.isEmpty()) {
+    private static List<Taxi> taxis = new ArrayList<> ();
+
+    public static List<Taxi> obtenerTaxis() {
+        if (taxis.isEmpty()) {  // Ahora esto no causará NullPointerException
             taxis.add(new Taxi(1, 1, "XXC23"));
             taxis.add(new Taxi(5, 4, "XCV33"));
             taxis.add(new Taxi(6, 9, "GHJ45"));

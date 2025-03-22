@@ -13,7 +13,7 @@ public class MainServidor {
         try {
             //Direccion estatica para el servidor (cambiar a la del pc donde se va a ejecutar)
             //Si se ejecutan como procesos locales dejar comentado esta propiedad
-            System.setProperty ("java.rmi.server.hostname", "192.168.20.205");
+            //System.setProperty ("java.rmi.server.hostname", "192.168.20.205");
 
             //Crear RMI registry en el puerto 1099
             Registry registry = LocateRegistry.createRegistry (1099);
