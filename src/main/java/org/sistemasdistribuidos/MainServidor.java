@@ -11,6 +11,10 @@ import java.rmi.registry.Registry;
 public class MainServidor {
     public static void main(String[] args) {
         try {
+            //Direccion estatica para el servidor (cambiar a la del pc donde se va a ejecutar)
+            //Si se ejecutan como procesos locales dejar comentado esta propiedad
+            System.setProperty ("java.rmi.server.hostname", "192.168.20.205");
+
             //Crear RMI registry en el puerto 1099
             Registry registry = LocateRegistry.createRegistry (1099);
             System.out.println("RMI Registry creado en el puerto 1099");
