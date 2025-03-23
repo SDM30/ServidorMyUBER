@@ -139,6 +139,11 @@ public class MyUBERImpl extends UnicastRemoteObject implements iMyUBER{
             return "Error: Usuario no encontrado en el sistema.";
         }
 
+        //Revisar coordenadas
+        if ( (posXUsr < 0 || posXUsr >= 10) || (posYUsr < 0 || posYUsr >= 10) ){
+            return "Error: Coordenadas Invalida";
+        }
+
         // Asignar las coordenadas ingresadas al usuario para el registre de su ubicación
         usuario.setCoordX(posXUsr);
         usuario.setCoordY(posYUsr);
